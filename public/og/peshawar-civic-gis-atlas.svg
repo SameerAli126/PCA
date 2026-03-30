@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Peshawar Civic GIS Atlas</title>
+  <desc id="desc">Open Graph image for the Peshawar Civic GIS Atlas.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e0f2fe" />
+      <stop offset="50%" stop-color="#ccfbf1" />
+      <stop offset="100%" stop-color="#f8fafc" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <circle cx="930" cy="150" r="180" fill="#0f766e" opacity="0.10" />
+  <circle cx="1000" cy="500" r="220" fill="#2563eb" opacity="0.10" />
+  <rect x="72" y="72" width="1056" height="486" rx="32" fill="#ffffff" opacity="0.92" />
+  <rect x="72" y="72" width="1056" height="486" rx="32" fill="none" stroke="#cbd5e1" />
+  <text x="120" y="175" fill="#0f172a" font-family="'Segoe UI', Arial, sans-serif" font-size="28" font-weight="700" letter-spacing="3">PAKISTAN / KP / PESHAWAR</text>
+  <text x="120" y="280" fill="#0f172a" font-family="'Segoe UI', Arial, sans-serif" font-size="68" font-weight="800">Peshawar Civic GIS Atlas</text>
+  <text x="120" y="350" fill="#334155" font-family="'Segoe UI', Arial, sans-serif" font-size="34">Laravel + MariaDB civic mapping with</text>
+  <text x="120" y="395" fill="#334155" font-family="'Segoe UI', Arial, sans-serif" font-size="34">facility search, provenance, and imports.</text>
+  <g transform="translate(810 250)">
+    <rect x="0" y="0" width="220" height="160" rx="24" fill="#ecfeff" stroke="#99f6e4" />
+    <path d="M110 30c-30 0-54 24-54 54 0 40 54 96 54 96s54-56 54-96c0-30-24-54-54-54zm0 74a20 20 0 1 1 0-40 20 20 0 0 1 0 40z" fill="#0f766e"/>
+    <path d="M28 120h164" stroke="#0ea5e9" stroke-width="10" stroke-linecap="round"/>
+    <path d="M28 92h110" stroke="#38bdf8" stroke-width="10" stroke-linecap="round"/>
+  </g>
+</svg>

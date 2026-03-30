@@ -1,0 +1,64 @@
+openapi: 3.1.0
+info:
+  title: Peshawar Civic GIS Atlas API
+  version: 1.0.0
+servers:
+  - url: http://127.0.0.1:8000/api
+paths:
+  /map/layers:
+    get:
+      summary: List atlas layer metadata
+      responses:
+        '200':
+          description: Layer configuration
+  /facilities:
+    get:
+      summary: List filtered facilities
+      parameters:
+        - in: query
+          name: search
+          schema: { type: string }
+        - in: query
+          name: category
+          schema: { type: string }
+        - in: query
+          name: area
+          schema: { type: string }
+        - in: query
+          name: source_year
+          schema: { type: integer }
+      responses:
+        '200':
+          description: Facility collection with GeoJSON
+  /facilities/{slug}:
+    get:
+      summary: Get one facility
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Facility detail
+  /areas/{slug}:
+    get:
+      summary: Get one administrative area and its metrics
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Area detail
+  /analytics/summary:
+    get:
+      summary: Get dashboard summary numbers
+      parameters:
+        - in: query
+          name: area
+          schema: { type: string }
+      responses:
+        '200':
+          description: Summary payload
