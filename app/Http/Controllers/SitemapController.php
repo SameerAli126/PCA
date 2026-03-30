@@ -18,6 +18,12 @@ class SitemapController extends Controller
                 'changefreq' => 'daily',
                 'priority' => '1.0',
             ],
+            [
+                'loc' => $siteUrl.route('atlas.explore', [], false),
+                'lastmod' => now()->toAtomString(),
+                'changefreq' => 'daily',
+                'priority' => '0.9',
+            ],
         ];
 
         foreach (Facility::query()->published()->latest('updated_at')->get(['slug', 'updated_at']) as $facility) {

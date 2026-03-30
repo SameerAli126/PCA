@@ -13,6 +13,7 @@ Route::get('/robots.txt', RobotsController::class)->name('robots');
 Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 
 Route::get('/', [PublicMapController::class, 'index'])->name('atlas.index');
+Route::get('/atlas/explore', [PublicMapController::class, 'explore'])->name('atlas.explore');
 Route::get('/facilities/{facility:slug}', [PublicMapController::class, 'show'])->name('facilities.show');
 
 Route::get('/dashboard', fn () => redirect()->route('admin.dashboard'))

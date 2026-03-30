@@ -18,7 +18,21 @@ class ExampleTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertSee('Peshawar public-services GIS')
-            ->assertSee('Atlas workbench');
+            ->assertSee('Review filters and shortlist facilities')
+            ->assertSee('Atlas workbench')
+            ->assertSee('Open filtered explorer');
+    }
+
+    public function test_the_explorer_page_returns_a_successful_response(): void
+    {
+        $this->seed(DatabaseSeeder::class);
+
+        $response = $this->get('/atlas/explore');
+
+        $response
+            ->assertOk()
+            ->assertSee('Dedicated map explorer')
+            ->assertSee('Interactive facility map')
+            ->assertSee('Back to Workbench');
     }
 }

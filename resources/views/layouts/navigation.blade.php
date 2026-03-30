@@ -12,7 +12,8 @@
             </a>
 
             <div class="hidden items-center gap-2 md:flex">
-                <a class="atlas-nav-link {{ request()->routeIs('atlas.index') ? 'atlas-nav-link-active' : '' }}" href="{{ route('atlas.index') }}">Atlas</a>
+                <a class="atlas-nav-link {{ request()->routeIs('atlas.index') ? 'atlas-nav-link-active' : '' }}" href="{{ route('atlas.index') }}">Workbench</a>
+                <a class="atlas-nav-link {{ request()->routeIs('atlas.explore') ? 'atlas-nav-link-active' : '' }}" href="{{ route('atlas.explore') }}">Explore</a>
                 @auth
                     @if (auth()->user()->canAccessAdmin())
                         <a class="atlas-nav-link {{ request()->routeIs('admin.*') ? 'atlas-nav-link-active' : '' }}" href="{{ route('admin.dashboard') }}">Admin</a>
@@ -45,7 +46,8 @@
 
     <div x-show="open" x-transition class="border-t border-slate-200 bg-white px-4 py-4 md:hidden">
         <div class="space-y-2">
-            <a class="atlas-mobile-link" href="{{ route('atlas.index') }}">Atlas</a>
+            <a class="atlas-mobile-link" href="{{ route('atlas.index') }}">Workbench</a>
+            <a class="atlas-mobile-link" href="{{ route('atlas.explore') }}">Explore</a>
             @auth
                 @if (auth()->user()->canAccessAdmin())
                     <a class="atlas-mobile-link" href="{{ route('admin.dashboard') }}">Admin</a>

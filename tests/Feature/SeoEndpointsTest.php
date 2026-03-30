@@ -40,6 +40,7 @@ class SeoEndpointsTest extends TestCase
         $response->assertOk();
         $response->assertHeader('Content-Type', 'application/xml; charset=UTF-8');
         $response->assertSee(self::PUBLIC_URL.'/', false);
+        $response->assertSee(self::PUBLIC_URL.'/atlas/explore', false);
         $response->assertSee('/facilities/lady-reading-hospital', false);
     }
 

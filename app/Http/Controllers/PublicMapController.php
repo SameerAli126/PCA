@@ -8,6 +8,7 @@ use App\Models\Facility;
 use App\Models\FacilityCategory;
 use App\Services\AnalyticsService;
 use App\Services\MapLayerService;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class PublicMapController extends Controller
@@ -18,27 +19,11 @@ class PublicMapController extends Controller
     ) {
     }
 
-    public function index(): View
+    public function index(Request $request): View
     {
-        $defaultArea = AdministrativeArea::query()
-            ->where('slug', config('civic_atlas.default_area_slug'))
-            ->first();
+        $description = 'Review filters, shortlist facilities, and launch a dedicated map explorer for Peshawar civic data.';
 
-        $description = 'Explore schools, hospitals, and civic service points across Peshawar, with searchable facilities, map filters, and dataset provenance.';
-
-        return view('atlas.index', [
-            'atlasName' => config('civic_atlas.name'),
-            'defaultArea' => $defaultArea,
-            'summary' => $this->analyticsService->summary($defaultArea),
-            'layers' => $this->mapLayerService->layers(),
-            'categories' => FacilityCategory::query()->active()->orderBy('name')->get(),
-            'featuredFacilities' => Facility::query()
-                ->published()
-                ->with(['category', 'administrativeArea'])
-                ->latest()
-                ->take(6)
-                ->get(),
-            'datasets' => Dataset::query()->where('is_active', true)->with('versions')->get(),
+        return view('atlas.index', $this->publicAtlasPayload($request, [
             'seo' => [
                 'title' => config('civic_atlas.name'),
                 'description' => $description,
@@ -56,7 +41,32 @@ class PublicMapController extends Controller
                     ],
                 ],
             ],
-        ]);
+        ]));
+    }
+
+    public function explore(Request $request): View
+    {
+        $description = 'Explore the full-screen public atlas for Peshawar with dedicated map controls, district overlays, and layer toggles.';
+
+        return view('atlas.explore', $this->publicAtlasPayload($request, [
+            'seo' => [
+                'title' => config('civic_atlas.name').' Explorer',
+                'description' => $description,
+                'canonical' => rtrim((string) config('civic_atlas.public_url'), '/').route('atlas.explore', [], false),
+                'type' => 'website',
+                'json_ld' => [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'CollectionPage',
+                    'name' => config('civic_atlas.name').' Explorer',
+                    'url' => rtrim((string) config('civic_atlas.public_url'), '/').route('atlas.explore', [], false),
+                    'description' => $description,
+                    'publisher' => [
+                        '@type' => 'Organization',
+                        'name' => config('civic_atlas.seo.public_owner'),
+                    ],
+                ],
+            ],
+        ]));
     }
 
     public function show(Facility $facility): View
@@ -102,5 +112,33 @@ class PublicMapController extends Controller
                 ],
             ],
         ]);
+    }
+
+    private function publicAtlasPayload(Request $request, array $overrides = []): array
+    {
+        $defaultArea = AdministrativeArea::query()
+            ->where('slug', config('civic_atlas.default_area_slug'))
+            ->first();
+
+        return array_merge([
+            'atlasName' => config('civic_atlas.name'),
+            'defaultArea' => $defaultArea,
+            'summary' => $this->analyticsService->summary($defaultArea),
+            'layers' => $this->mapLayerService->layers(),
+            'categories' => FacilityCategory::query()->active()->orderBy('name')->get(),
+            'featuredFacilities' => Facility::query()
+                ->published()
+                ->with(['category', 'administrativeArea'])
+                ->latest()
+                ->take(6)
+                ->get(),
+            'datasets' => Dataset::query()->where('is_active', true)->with('versions')->get(),
+            'activeFilters' => [
+                'search' => $request->string('search')->toString(),
+                'category' => $request->string('category')->toString(),
+                'area' => $request->string('area')->toString() ?: $defaultArea?->slug,
+                'source_year' => $request->string('source_year')->toString(),
+            ],
+        ], $overrides);
     }
 }

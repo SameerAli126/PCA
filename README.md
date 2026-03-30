@@ -4,7 +4,7 @@ Laravel 12 + Blade + Alpine + Leaflet civic GIS for Peshawar, seeded with demo f
 
 ## What Is Implemented
 
-- Public atlas with live facility filters, Leaflet map, facility detail pages, and provenance display
+- Public workbench plus dedicated map explorer, with facility filters, Leaflet map tooling, facility detail pages, and provenance display
 - Admin console with RBAC, dataset catalog, import upload, validation, and publish workflow
 - MariaDB-ready GIS schema using lat/lng plus optional geometry columns
 - Demo seed data for Peshawar district, categories, metrics, facilities, and operator accounts
@@ -78,7 +78,8 @@ If you also want the queue worker in the same session:
 
 ## Key Paths
 
-- Public atlas: `/`
+- Public workbench: `/`
+- Public explorer: `/atlas/explore`
 - Admin dashboard: `/admin`
 - Dataset catalog: `/admin/datasets`
 - Imports: `/admin/imports`

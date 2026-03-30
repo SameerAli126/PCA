@@ -10,7 +10,7 @@
                     {{ $facility->datasetVersion?->dataset?->name ?? 'the civic atlas pipeline' }}.
                 </p>
             </div>
-            <a class="atlas-button atlas-button-secondary" href="{{ route('atlas.index') }}">Back to atlas</a>
+            <a class="atlas-button atlas-button-secondary" href="{{ route('atlas.explore') }}">Back to explorer</a>
         </div>
     </x-slot>
 
